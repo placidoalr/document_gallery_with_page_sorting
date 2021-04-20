@@ -28,6 +28,11 @@ namespace document_gallery_with_page_sorting
             if(LoadedImages.Count > 0)
             {
                 label1.Text = $"( 1 / {LoadedImages.Count} )";
+                //label2.Text = "Tudo OK";
+            }
+            else
+            {
+                //label2.Text = "Sem conteúdo selecionado!";
             }
         }
 
@@ -76,7 +81,8 @@ namespace document_gallery_with_page_sorting
             {
                 if(item == index)
                 {
-                    list.Items[item].Selected = true;
+                    list.Items[item].Selected = true;                    
+                    list.EnsureVisible(item);
                 } else
                 {
                     list.Items[item].Selected = false;
@@ -122,7 +128,7 @@ namespace document_gallery_with_page_sorting
 
             for (int itemIndex = 0; itemIndex < LoadedImages.Count; itemIndex++)
             {
-                imageList.Items.Add(new ListViewItem($"Página {itemIndex}", itemIndex ));
+                imageList.Items.Add(new ListViewItem($"Página {itemIndex + 1}", itemIndex ));
             }
         }
 
@@ -170,6 +176,26 @@ namespace document_gallery_with_page_sorting
                 selectedImage.Image = selectedImg;
                 SelectTheClickedItem(imageList, SelectedImageIndex);
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //if (LoadedImages.Count > 0) 
+            //{
+            //    string htmlContent = "<body>";
+            //    foreach (var pages in LoadedImages)
+            //    {
+            //        htmlContent += $"{pages}";
+            //    }
+            //    htmlContent += "</body>";
+
+            //    var htmlToPdf = new HtmlToPdfConverter();
+            //    htmlToPdf.GeneratePdf(htmlContent);
+            //}
+            //else 
+            //{
+            //    label2.Text = "Sem conteúdo selecionado!";
+            //}
         }
     }
 }

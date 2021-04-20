@@ -16,3 +16,4 @@ C:\Users\markos\Documents\__DEV\__DOTNET\document_dropdown_pages\obj\Debug\netco
 C:\Users\markos\Documents\__DEV\__DOTNET\document_dropdown_pages\obj\Debug\netcoreapp3.1\document_gallery_with_page_sorting.dll
 C:\Users\markos\Documents\__DEV\__DOTNET\document_dropdown_pages\obj\Debug\netcoreapp3.1\document_gallery_with_page_sorting.pdb
 C:\Users\markos\Documents\__DEV\__DOTNET\document_dropdown_pages\obj\Debug\netcoreapp3.1\document_gallery_with_page_sorting.genruntimeconfig.cache
+C:\Users\markos\Documents\__DEV\__DOTNET\document_dropdown_pages\obj\Debug\netcoreapp3.1\document_gallery_with_page_sorting.csprojAssemblyReference.cache
