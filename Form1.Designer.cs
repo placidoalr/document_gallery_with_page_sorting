@@ -101,23 +101,23 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(14, 520);
+            this.button1.Location = new System.Drawing.Point(451, 520);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(72, 47);
+            this.button1.Size = new System.Drawing.Size(48, 47);
             this.button1.TabIndex = 3;
-            this.button1.Text = "Anterior";
+            this.button1.Text = "<";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button_navigation);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(129, 520);
+            this.button2.Location = new System.Drawing.Point(507, 520);
             this.button2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(72, 47);
+            this.button2.Size = new System.Drawing.Size(46, 47);
             this.button2.TabIndex = 4;
-            this.button2.Text = "Proxima";
+            this.button2.Text = ">";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button_navigation);
             // 
@@ -135,21 +135,21 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(242, 191);
+            this.button4.Location = new System.Drawing.Point(14, 520);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(46, 47);
+            this.button4.Size = new System.Drawing.Size(103, 47);
             this.button4.TabIndex = 6;
-            this.button4.Text = "^";
+            this.button4.Text = "Página p/ trás";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(242, 283);
+            this.button5.Location = new System.Drawing.Point(123, 520);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(46, 47);
+            this.button5.Size = new System.Drawing.Size(112, 47);
             this.button5.TabIndex = 7;
-            this.button5.Text = "v";
+            this.button5.Text = "Página p/ frente";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click_1);
             // 

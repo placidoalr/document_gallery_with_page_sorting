@@ -18,21 +18,53 @@ namespace document_gallery_with_page_sorting
         }
 
         private void LoadImagesFromFolder(string[] paths)
-        {
+        {            
             LoadedImages = new List<Image>();
-            foreach(var path in paths)
+            foreach (var path in paths)
             {
+                //Image image;
+                var ext = path.Split(".")[path.Split(".").Length - 1].ToString();
+
+                Image[] getFrames(Image tempImage)
+                {
+                    int pages = tempImage.GetFrameCount(System.Drawing.Imaging.FrameDimension.Page);
+                    Image[] frames = new Image[pages];
+
+                    for (int index = 0; index < pages; index++)
+                    {
+                        tempImage.SelectActiveFrame(System.Drawing.Imaging.FrameDimension.Page, index);
+                        frames[index] = ((Image)tempImage.Clone());
+                    }
+
+                    return frames;
+                }
+
+                switch (ext)
+                {
+                    case "tif":
+                    case "tiff":
+                    case "TIF":
+                    case "TIFF":
+                        Image[] framesTiff = getFrames(Image.FromFile(path));
+                        LoadedImages.AddRange(framesTiff);
+
+                        break;
+                    //case "pdf":
+                    //case "PDF":                        
+                    //    Image[] framesPdf = getFrames(Image.FromFile(path));
+                    //    LoadedImages.AddRange(framesPdf);
+
+                    //    break;
+                    default:
+                        var tempImages = Image.FromFile(path);
+                        LoadedImages.Add(tempImages);
+                        break;
+                }
                 var tempImage = Image.FromFile(path);
-                LoadedImages.Add(tempImage);
             }
-            if(LoadedImages.Count > 0)
+            if (LoadedImages.Count > 0)
             {
                 label1.Text = $"( 1 / {LoadedImages.Count} )";
-                //label2.Text = "Tudo OK";
-            }
-            else
-            {
-                //label2.Text = "Sem conteúdo selecionado!";
             }
         }
 
@@ -116,9 +148,13 @@ namespace document_gallery_with_page_sorting
             ImageList images = new ImageList();
             images.ImageSize = new Size(130, 180);
 
-            foreach (var image in LoadedImages)
+            //foreach (var image in LoadedImages)
+            //{
+            //    images.Images.Add(image);
+            //}
+            for (int i = 0; i < LoadedImages.Count; i++)
             {
-                images.Images.Add(image);
+                images.Images.Add(LoadedImages[i]);
             }
 
             imageList.Items.Clear();
