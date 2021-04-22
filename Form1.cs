@@ -64,6 +64,8 @@ namespace document_gallery_with_page_sorting
             }
             if (LoadedImages.Count > 0)
             {
+                Image selectedImg = LoadedImages[0];
+                selectedImage.Image = selectedImg;
                 label1.Text = $"( 1 / {LoadedImages.Count} )";
             }
         }
@@ -232,6 +234,23 @@ namespace document_gallery_with_page_sorting
             //{
             //    label2.Text = "Sem conteúdo selecionado!";
             //}
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var selectedIndex = imageList.SelectedIndices[0];
+                LoadedImages.Remove(LoadedImages[selectedIndex]);
+                PreiewImages();
+                Image selectedImg = LoadedImages[0];
+                selectedImage.Image = selectedImg;
+                label1.Text = $"( 1 / {LoadedImages.Count} )";
+            }
+            catch (Exception excessao)
+            {
+
+            }
         }
     }
 }
