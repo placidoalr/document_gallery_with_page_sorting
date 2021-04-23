@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Security;
 using System.Windows.Forms;
 
 namespace document_gallery_with_page_sorting
@@ -17,13 +18,13 @@ namespace document_gallery_with_page_sorting
             InitializeComponent();
         }
 
-        private void LoadImagesFromFolder(string[] paths)
+        private void LoadImagesFromFolder(Stream path)
         {            
             LoadedImages = new List<Image>();
-            foreach (var path in paths)
-            {
-                //Image image;
-                var ext = path.Split(".")[path.Split(".").Length - 1].ToString();
+            //foreach (var path in paths)
+            //{
+                Image image = Image.FromStream(path);
+                //var ext = path.Split(".")[path.Split(".").Length - 1].ToString();
 
                 Image[] getFrames(Image tempImage)
                 {
@@ -39,29 +40,30 @@ namespace document_gallery_with_page_sorting
                     return frames;
                 }
 
-                switch (ext)
-                {
-                    case "tif":
-                    case "tiff":
-                    case "TIF":
-                    case "TIFF":
-                        Image[] framesTiff = getFrames(Image.FromFile(path));
+                //switch (ext)
+                //{
+                    //case "tif":
+                    //case "tiff":
+                    //case "TIF":
+                    //case "TIFF":
+
+                        Image[] framesTiff = getFrames(image);
                         LoadedImages.AddRange(framesTiff);
 
-                        break;
+                        //break;
                     //case "pdf":
                     //case "PDF":                        
                     //    Image[] framesPdf = getFrames(Image.FromFile(path));
                     //    LoadedImages.AddRange(framesPdf);
 
                     //    break;
-                    default:
-                        var tempImages = Image.FromFile(path);
-                        LoadedImages.Add(tempImages);
-                        break;
-                }
-                var tempImage = Image.FromFile(path);
-            }
+                    //default:
+                        //var tempImages = Image.FromFile(path);
+                        //LoadedImages.Add(tempImages);
+                        //break;
+                //}
+                //var tempImage = Image.FromFile(path);
+            //}
             if (LoadedImages.Count > 0)
             {
                 Image selectedImg = LoadedImages[0];
@@ -127,23 +129,51 @@ namespace document_gallery_with_page_sorting
 
         private void selectDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
-            if (folderBrowser.ShowDialog() == DialogResult.OK)
+            var fileContent = string.Empty;
+            var filePath = string.Empty;
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                // selected directory
-                var selectedDirectory = folderBrowser.SelectedPath;
-                // images paths from selected directory
-                var imagePaths = Directory.GetFiles(selectedDirectory);
-                // loading images from images paths
-                LoadImagesFromFolder(imagePaths);
+                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
 
-                PreiewImages();
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    filePath = openFileDialog.FileName;
 
+                    //Read the contents of the file into a stream
+                    var fileStream = openFileDialog.OpenFile();
+
+                    LoadImagesFromFolder(fileStream);
+                    using (StreamReader reader = new StreamReader(fileStream))
+                    {
+                        fileContent = reader.ReadToEnd();
+                    }
+                }
             }
-            
-        }
 
-        public void PreiewImages()
+            //MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
+
+            //FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
+            //if (folderBrowser.ShowDialog() == DialogResult.OK)
+            //{
+            //    // selected directory
+            //    var selectedDirectory = folderBrowser.SelectedPath;
+
+            //    // images paths from selected directory
+            //    var imagePaths = Directory.GetFiles(selectedDirectory);
+            //    // loading images from images paths 
+
+            PreiewImages();
+
+        //}
+
+    }
+
+
+public void PreiewImages()
         {
 
             // initializing images list
